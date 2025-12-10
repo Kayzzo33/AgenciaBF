@@ -19,7 +19,7 @@ export const Footer = () => (
         <div>
           <h4 className="text-white font-bold mb-6 uppercase tracking-wider">Contato</h4>
           <ul className="space-y-4">
-            <li className="flex items-center gap-3 text-gray-400 hover:text-brand-yellow transition-colors"><Phone size={18} className="text-brand-yellow" /><span>+55 73 9830-6902</span></li>
+            <li className="flex items-center gap-3 text-gray-400 hover:text-brand-yellow transition-colors"><Phone size={18} className="text-brand-yellow" /><span>+55 73 99100-2247</span></li>
             <li className="flex items-center gap-3 text-gray-400 hover:text-brand-yellow transition-colors"><Mail size={18} className="text-brand-yellow" /><span>bfagencia1@gmail.com</span></li>
             <li className="flex items-center gap-3 text-gray-400"><div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div><span>Disponível agora para novos projetos</span></li>
           </ul>

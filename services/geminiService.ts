@@ -19,7 +19,7 @@ export const generateAIResponse = async (userMessage: string): Promise<string> =
       - Nome: BF Agência
       - Especialidade: Gestão de Tráfego Pago (Google Ads, Meta Ads), Criação de Copy, Treinamento de Equipes.
       - Diferencial: Análise de dados profunda, foco em ROI, atendimento humanizado.
-      - Contato: WhatsApp +55 73 9830-6902.
+      - Contato: WhatsApp +55 73 99100-2247.
       
       OBJETIVO:
       Responda a dúvidas sobre os serviços de forma curta, profissional e persuasiva. Tente levar o usuário a agendar uma conversa.
