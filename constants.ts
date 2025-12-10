@@ -71,6 +71,7 @@ export const EXTENDED_TEAM = [
     role: "Setor Administrativo", 
     instagram: "https://www.instagram.com/anneujjo/", 
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785473/Design_sem_nome_33_kbp3ml.png", 
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_42_q2cfik.png",
     active: true
   },
   { 
@@ -78,6 +79,7 @@ export const EXTENDED_TEAM = [
     role: "Suporte ao cliente", 
     instagram: "https://www.instagram.com/gleh_01/", 
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785473/Design_sem_nome_34_juikmo.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_41_fyoiso.png",
     active: true 
   },
   { 
@@ -85,6 +87,7 @@ export const EXTENDED_TEAM = [
     role: "Gestor de Tráfego", 
     instagram: "https://www.instagram.com/o.ytallo/", 
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764789524/Design_sem_nome_36_uvsfcy.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_40_mweocc.png",
     active: true
   },
   { 
@@ -92,6 +95,7 @@ export const EXTENDED_TEAM = [
     role: "Especialista em Google meu Negócio", 
     instagram: "https://www.instagram.com/evin_san_?igsh=NGN4MmN0MTF4b3ow", 
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764789524/Design_sem_nome_35_wknqat.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_39_xe3zaw.png",
     active: true
   },
   { 
@@ -99,6 +103,7 @@ export const EXTENDED_TEAM = [
     role: "Especialista em Contingência", 
     instagram: "https://www.instagram.com/g.soglia/", 
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765326689/Design_sem_nome_37_a2mqkn.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_38_vrxc6w.png",
     active: true
   },
 ];

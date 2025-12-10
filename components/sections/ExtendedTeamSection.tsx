@@ -30,8 +30,12 @@ export const ExtendedTeamSection = () => {
                     "w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 transition-all duration-300",
                     member.active ? "border-brand-yellow/50 group-hover:border-brand-yellow" : "border-zinc-700"
                   )}>
-                    {member.image ? (
-                      <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
+                    {member.thumbnail || member.image ? (
+                      <img 
+                        src={member.thumbnail || member.image} 
+                        alt={member.name} 
+                        className="w-full h-full object-cover object-top" 
+                      />
                     ) : (
                       <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600">
                         <User size={32} />
