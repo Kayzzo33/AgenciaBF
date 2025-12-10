@@ -16,13 +16,13 @@ export const ExtendedTeamSection = () => {
              </h2>
           </Reveal>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-5xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-8 max-w-6xl mx-auto">
              {EXTENDED_TEAM.map((member, idx) => (
                <div 
                  key={idx}
                  onClick={() => member.active && setActiveMember(member)}
                  className={cn(
-                   "relative group rounded-2xl p-4 transition-all duration-300 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-4",
+                   "relative group rounded-2xl p-4 transition-all duration-300 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-4 w-[45%] md:w-56 flex-grow-0",
                    member.active ? "cursor-pointer hover:border-brand-yellow hover:bg-zinc-800 hover:-translate-y-2" : "opacity-50 grayscale cursor-not-allowed"
                  )}
                >

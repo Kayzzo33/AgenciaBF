@@ -17,7 +17,7 @@ export const ASSETS = {
   teamFrame: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785099/QuadradoLinha_quqo4f.png", 
   teamLogo: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784775/Logo_Preta_gkfaix.png",
   notebookBlack: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764787033/notebookblack_-_Editado_b91fnn.png",
-  notebookBlur: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785100/notebookblackdesfocado_r2icbg.png",
+  notebookBlur: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785100/notebookblack_-_Editado_b91fnn.png",
   partnerPerson: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785607/Gemini_Generated_Image_r9yafcr9yafcr9ya_zap6qs.png",
 };
 
@@ -92,6 +92,13 @@ export const EXTENDED_TEAM = [
     role: "Especialista em Google meu Negócio", 
     instagram: "https://www.instagram.com/evin_san_?igsh=NGN4MmN0MTF4b3ow", 
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764789524/Design_sem_nome_35_wknqat.png",
+    active: true
+  },
+  { 
+    name: "Giselle", 
+    role: "Especialista em Contingência", 
+    instagram: "https://www.instagram.com/g.soglia/", 
+    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765326689/Design_sem_nome_37_a2mqkn.png",
     active: true
   },
 ];
