@@ -1,44 +1,88 @@
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, FunctionDeclaration, Type } from "@google/genai";
 
-export const generateAIResponse = async (userMessage: string): Promise<string> => {
+// Tool definition for saving leads
+const saveLeadTool: FunctionDeclaration = {
+  name: 'saveLead',
+  parameters: {
+    type: Type.OBJECT,
+    description: 'Salva os dados de um cliente potencial (lead) no banco de dados quando ele demonstra interesse. Deve ser chamado ao final da qualificação.',
+    properties: {
+      name: { type: Type.STRING, description: 'Nome do cliente' },
+      company: { type: Type.STRING, description: 'Nome da empresa ou "Projeto Pessoal" se não tiver empresa.' },
+      phone: { type: Type.STRING, description: 'Telefone ou WhatsApp do cliente' },
+      revenue: { type: Type.STRING, description: 'Faturamento mensal estimado (ou "Iniciante" se não tiver)' },
+      needs: { type: Type.STRING, description: 'RESUMO COMPLETO da conversa: O que o cliente quer? Qual a dor dele? (Ex: "Quer crescer instagram pessoal", "Tem loja de roupas e quer vender mais")' }
+    },
+    required: ['name', 'phone', 'company', 'needs'],
+  },
+};
+
+export interface ChatMessage {
+  role: 'user' | 'model';
+  text: string;
+}
+
+export const generateAIResponse = async (history: ChatMessage[]): Promise<{ text: string, functionCall?: any }> => {
   try {
-    // Safety check: access process.env safely to prevent "process is not defined" crashes
     const apiKey = typeof process !== 'undefined' && process.env ? process.env.API_KEY : undefined;
     
     if (!apiKey) {
-      console.warn("API_KEY is missing in the environment.");
-      return "⚠️ O chat está indisponível no momento porque a Chave de API não foi configurada no sistema. Por favor, entre em contato via WhatsApp.";
+      return { text: "⚠️ Configuração de API ausente." };
     }
 
     const ai = new GoogleGenAI({ apiKey: apiKey });
 
     const systemInstruction = `
-      Você é o assistente virtual da BF Agência, uma agência de marketing digital especializada em tráfego pago.
+      Você é a IA de Vendas da BF Agência (Gestão de Tráfego).
       
-      INFORMAÇÕES DA AGÊNCIA:
-      - Nome: BF Agência
-      - Especialidade: Gestão de Tráfego Pago (Google Ads, Meta Ads), Criação de Copy, Treinamento de Equipes.
-      - Diferencial: Análise de dados profunda, foco em ROI, atendimento humanizado.
-      - Contato: WhatsApp +55 73 99100-2247.
+      SEU OBJETIVO:
+      Qualificar e coletar dados de QUALQUER pessoa interessada em crescer no digital.
+
+      REGRAS CRITICAS:
+      1. **CLIENTE SEM EMPRESA É CLIENTE**: Se o usuário disser "Não tenho empresa", NÃO O DESCARTE. Trate como um projeto de "Marca Pessoal", "Influenciador" ou "Negócio em fase de ideia". Pergunte qual o objetivo dele (Ex: "Quer crescer seu perfil pessoal?", "Quer lançar um produto?").
+      2. **QUALIFICAÇÃO**:
+         - Nome
+         - Nome do Projeto/Empresa (Se não tiver, chame de "Projeto Pessoal")
+         - WhatsApp
+         - Faturamento (Se for pessoa física/iniciante, pergunte quanto pretende investir ou se está começando do zero).
+      3. **PEDIDO DE NÚMERO**: Se o usuário pedir especificamente "me passa o zap", "quero o número" ou "falar com humano" AGORA, forneça o link https://wa.me/5573991002247 IMEDIATAMENTE.
       
-      OBJETIVO:
-      Responda a dúvidas sobre os serviços de forma curta, profissional e persuasiva. Tente levar o usuário a agendar uma conversa.
-      Se perguntarem preços, diga que depende do projeto e sugira uma análise gratuita.
-      
-      Tom de voz: Profissional, moderno, direto e energético.
+      FINALIZAÇÃO (Use a ferramenta 'saveLead'):
+      - Assim que tiver os dados básicos, chame a função 'saveLead'.
+      - No campo 'needs' da função, faça um RESUMO do que o cliente falou. Não coloque apenas "tráfego". Coloque: "Cliente quer anunciar perfil pessoal de nutrição", ou "Cliente vai abrir loja mês que vem".
+      - Após chamar a função, diga: "Perfeito, [Nome]. Registrei seu interesse e nosso especialista já vai analisar seu caso. Clique no botão abaixo para finalizar."
+
+      Tom de voz: Profissional, "Lobo de Wall Street", mas adaptável. Se o cliente não tem empresa, seja encorajador ("Vamos construir esse império do zero").
     `;
+
+    // Convert internal history format to Gemini format
+    const contents = history.map(msg => ({
+      role: msg.role,
+      parts: [{ text: msg.text }]
+    }));
 
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
-      contents: userMessage,
+      contents: contents,
       config: {
         systemInstruction: systemInstruction,
+        tools: [{ functionDeclarations: [saveLeadTool] }],
       }
     });
 
-    return response.text || "Desculpe, não consegui processar sua solicitação no momento.";
+    const candidate = response.candidates?.[0];
+    const modelText = candidate?.content?.parts?.find(p => p.text)?.text || "";
+    
+    // Check for function calls
+    const functionCall = candidate?.content?.parts?.find(p => p.functionCall)?.functionCall;
+
+    return {
+      text: modelText,
+      functionCall: functionCall
+    };
+
   } catch (error) {
     console.error("Erro na Gemini API:", error);
-    return "Estamos com alto volume de contatos. Por favor, use o WhatsApp para resposta imediata.";
+    return { text: "Estou enfrentando uma instabilidade momentânea. Por favor, me chame no WhatsApp." };
   }
 };
