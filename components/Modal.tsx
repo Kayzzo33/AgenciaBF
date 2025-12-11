@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Send, CheckCircle, Loader2 } from 'lucide-react';
 import { ContactFormState } from '../types';
 import { saveLead } from '../services/firebase';
+import { sendEmailNotification } from '../services/emailService';
 
 interface ModalProps {
   isOpen: boolean;
@@ -31,19 +32,24 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     e.preventDefault();
     setLoading(true);
 
-    // 1. Save to Firebase (Non-blocking)
-    // Se falhar por permissão, continuamos o fluxo para não perder o lead no WhatsApp
+    const leadData = {
+      ...formData,
+      source: 'website_form_modal'
+    };
+
+    // 1. Salvar no Firebase (Segurança dos dados)
     try {
-      await saveLead({
-        ...formData,
-        source: 'website_form_modal'
-      });
+      await saveLead(leadData);
     } catch (error) {
-      console.warn("Aviso: Não foi possível salvar no banco de dados (verifique regras do Firebase), mas prosseguindo para WhatsApp/Email.", error);
+      console.warn("Aviso: Firebase save falhou, mas prosseguindo.", error);
     }
 
+    // 2. Enviar Email Silencioso (EmailJS)
+    // Executamos sem 'await' obstrutivo ou tratamos erro internamente para não travar o user
+    sendEmailNotification(leadData).catch(err => console.error("Erro email:", err));
+
     try {
-      // 2. Format WhatsApp Message (Using api.whatsapp.com for better compatibility)
+      // 3. Formatar mensagem do WhatsApp e Redirecionar
       const messageText = `*Novo Lead do Site (BF Agência)*\n\n` +
                           `*Nome:* ${formData.name}\n` +
                           `*Empresa:* ${formData.company}\n` +
@@ -55,23 +61,16 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                           
       const whatsappUrl = `https://api.whatsapp.com/send?phone=5573991002247&text=${encodeURIComponent(messageText)}`;
 
-      // 3. Email Link (Client-side fallback since we don't have a backend server for SMTP)
-      const mailtoUrl = `mailto:bfagencia1@gmail.com?subject=Novo Lead Site - ${formData.company}&body=Nome: ${formData.name}%0D%0AEmpresa: ${formData.company}%0D%0ATelefone: ${formData.phone}%0D%0AFaturamento: ${formData.revenue}%0D%0AMensagem: ${formData.message}`;
-      
       setSubmitted(true);
 
-      // Redirect actions
+      // 4. Redirecionamento ÚNICO para o WhatsApp após 1.5s
       setTimeout(() => {
-        // Open email client
-        window.location.href = mailtoUrl;
-        
-        // Open WhatsApp in new tab
         window.open(whatsappUrl, '_blank');
-      }, 1000);
+      }, 1500);
 
     } catch (error) {
-      console.error("Erro ao processar links:", error);
-      alert("Houve um erro ao processar. Por favor, nos chame diretamente no WhatsApp.");
+      console.error("Erro ao processar:", error);
+      alert("Houve um erro. Por favor, nos chame no WhatsApp manualmente.");
     } finally {
       setLoading(false);
     }
@@ -158,11 +157,15 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             <div className="text-brand-yellow mb-4">
               <CheckCircle size={64} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-2">Solicitação Enviada!</h3>
+            <h3 className="text-2xl font-bold text-white mb-2">Solicitação Recebida!</h3>
             <p className="text-gray-400 max-w-md mb-6">
-              Seus dados foram salvos. Você está sendo redirecionado para o WhatsApp e para o seu provedor de E-mail para confirmar o envio.
+              Recebemos seus dados.
+              <br/>
+              <span className="text-white font-bold">Redirecionando para o WhatsApp...</span>
             </p>
-            <button onClick={onClose} className="text-brand-yellow hover:underline">Fechar janela</button>
+            <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden max-w-[200px]">
+               <div className="h-full bg-brand-yellow animate-[scroll_1.5s_linear_infinite] w-full origin-left transform scale-x-0"></div>
+            </div>
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { X, Send, Bot, MessageCircle } from 'lucide-react';
 import { generateAIResponse, ChatMessage } from '../services/geminiService';
 import { saveLead } from '../services/firebase';
+import { sendEmailNotification } from '../services/emailService';
 
 export const AIChat: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,23 +36,26 @@ export const AIChat: React.FC = () => {
       if (functionCall && functionCall.name === 'saveLead') {
         // AI decided to save the lead
         const args = functionCall.args;
+        const leadData = {
+            ...args,
+            source: 'chatbot_qualification'
+        };
         
-        // Save to Firebase (Non-blocking)
+        // 1. Save to Firebase
         try {
-            await saveLead({
-                ...args,
-                source: 'chatbot_qualification'
-            });
+            await saveLead(leadData);
         } catch (e) {
-             console.warn("Aviso: Falha ao salvar lead no Firebase (verifique permissões), continuando fluxo.", e);
+             console.warn("Aviso: Falha ao salvar lead no Firebase, continuando fluxo.", e);
         }
+
+        // 2. Send Silent Email (EmailJS)
+        sendEmailNotification(leadData).catch(err => console.error("Erro email chat:", err));
 
         // Generate confirmation text
         const confirmText = "Perfeito! Já registrei seus dados e passei o resumo da nossa conversa para a equipe. Clique no botão abaixo para concluir o atendimento no WhatsApp.";
         setMessages(prev => [...prev, { role: 'model', text: confirmText }]);
         
         // Setup WhatsApp Button with RICH CONTEXT
-        // Using api.whatsapp.com/send is often more reliable for Desktop Apps than wa.me
         const waText = `*Iniciando Atendimento (Via Chatbot Site)*\n\n` +
                        `👤 *Nome:* ${args.name}\n` +
                        `🏢 *Empresa/Projeto:* ${args.company}\n` +
@@ -62,16 +66,7 @@ export const AIChat: React.FC = () => {
         const encodedText = encodeURIComponent(waText);
         setWhatsappLink(`https://api.whatsapp.com/send?phone=5573991002247&text=${encodedText}`);
         setLeadSaved(true);
-
-        // Also trigger email mailto for redundancy
-        const mailtoBody = `Nome: ${args.name}%0D%0AEmpresa: ${args.company}%0D%0AFone: ${args.phone}%0D%0AResumo: ${args.needs}`;
-        const mailtoUrl = `mailto:bfagencia1@gmail.com?subject=Lead via Chatbot - ${args.company}&body=${mailtoBody}`;
         
-        // Slight delay to prevent browser blocking the second popup/action
-        setTimeout(() => {
-            window.location.href = mailtoUrl;
-        }, 500);
-
       } else {
         // Normal text response
         setMessages(prev => [...prev, { role: 'model', text: text || "Entendido." }]);
@@ -115,10 +110,10 @@ export const AIChat: React.FC = () => {
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[85%] p-3 rounded-lg text-sm ${msg.role === 'user' ? 'bg-brand-yellow text-black rounded-tr-none' : 'bg-zinc-800 text-gray-200 rounded-tl-none'}`}>
                 {/* Check if text contains a link (simple heuristic) */}
-                {msg.text.includes('https://wa.me') ? (
+                {msg.text.includes('https://wa.me') || msg.text.includes('api.whatsapp.com') ? (
                     <span>
-                        {msg.text.split('https://wa.me')[0]}
-                        <a href="https://wa.me/5573991002247" target="_blank" rel="noopener noreferrer" className="underline font-bold text-brand-yellow hover:text-white">
+                        {msg.text.split(/https:\/\/(wa\.me|api\.whatsapp\.com)/)[0]}
+                        <a href="https://api.whatsapp.com/send?phone=5573991002247" target="_blank" rel="noopener noreferrer" className="underline font-bold text-brand-yellow hover:text-white">
                             Clique aqui para chamar no WhatsApp
                         </a>
                     </span>
