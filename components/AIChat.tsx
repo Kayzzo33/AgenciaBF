@@ -64,7 +64,8 @@ export const AIChat: React.FC = () => {
                        `📝 *Resumo da Conversa:* \n${args.needs}`;
         
         const encodedText = encodeURIComponent(waText);
-        setWhatsappLink(`https://api.whatsapp.com/send?phone=5573991002247&text=${encodedText}`);
+        // Usar wa.me para melhor compatibilidade
+        setWhatsappLink(`https://wa.me/5573991002247?text=${encodedText}`);
         setLeadSaved(true);
         
       } else {
@@ -113,7 +114,7 @@ export const AIChat: React.FC = () => {
                 {msg.text.includes('https://wa.me') || msg.text.includes('api.whatsapp.com') ? (
                     <span>
                         {msg.text.split(/https:\/\/(wa\.me|api\.whatsapp\.com)/)[0]}
-                        <a href="https://api.whatsapp.com/send?phone=5573991002247" target="_blank" rel="noopener noreferrer" className="underline font-bold text-brand-yellow hover:text-white">
+                        <a href="https://wa.me/5573991002247" target="_blank" rel="noopener noreferrer" className="underline font-bold text-brand-yellow hover:text-white">
                             Clique aqui para chamar no WhatsApp
                         </a>
                     </span>

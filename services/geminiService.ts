@@ -24,9 +24,13 @@ export interface ChatMessage {
 
 export const generateAIResponse = async (history: ChatMessage[]): Promise<{ text: string, functionCall?: any }> => {
   try {
-    const apiKey = typeof process !== 'undefined' && process.env ? process.env.API_KEY : undefined;
+    // Correção: Acessar diretamente process.env.API_KEY.
+    // O Vite substitui "process.env.API_KEY" pelo valor da string durante o build.
+    // A verificação anterior (typeof process !== 'undefined') falhava no browser pois o objeto 'process' não existe nativamente.
+    const apiKey = process.env.API_KEY;
     
     if (!apiKey) {
+      console.error("API_KEY não encontrada. Verifique o arquivo .env ou as variáveis de ambiente da Vercel.");
       return { text: "⚠️ Configuração de API ausente." };
     }
 

@@ -13,7 +13,7 @@ export const CtaSection = ({ onOpenModal }: { onOpenModal: () => void }) => (
           Temos apenas 3 vagas disponíveis para novos projetos este mês. Garanta sua análise gratuita agora.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <a href="https://wa.me/5573991002247?text=Quero transformar meu negócio com a BF Agência!" className="bg-black text-white font-bold text-lg px-10 py-4 rounded-lg hover:scale-105 transition-transform shadow-xl">Falar no WhatsApp</a>
+          <a href={`https://wa.me/5573991002247?text=${encodeURIComponent("Quero transformar meu negócio com a BF Agência!")}`} className="bg-black text-white font-bold text-lg px-10 py-4 rounded-lg hover:scale-105 transition-transform shadow-xl">Falar no WhatsApp</a>
           <button onClick={onOpenModal} className="bg-transparent border-2 border-black text-black font-bold text-lg px-10 py-4 rounded-lg hover:bg-black hover:text-white transition-all">Receber Proposta</button>
         </div>
       </Reveal>

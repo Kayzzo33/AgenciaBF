@@ -59,7 +59,8 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                           `*Investe:* ${formData.invests}\n` +
                           `*Mensagem:* ${formData.message}`;
                           
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=5573991002247&text=${encodeURIComponent(messageText)}`;
+      // Mudança para wa.me para melhor compatibilidade com Desktop
+      const whatsappUrl = `https://wa.me/5573991002247?text=${encodeURIComponent(messageText)}`;
 
       setSubmitted(true);
 
