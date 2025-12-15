@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Send, CheckCircle, Loader2 } from 'lucide-react';
 import { ContactFormState } from '../types';
 import { saveLead } from '../services/firebase';
@@ -9,18 +9,30 @@ interface ModalProps {
   onClose: () => void;
 }
 
+const INITIAL_FORM_STATE: ContactFormState = {
+  name: '',
+  email: '',
+  phone: '',
+  company: '',
+  revenue: '',
+  invests: 'não',
+  message: ''
+};
+
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState<ContactFormState>({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    revenue: '',
-    invests: 'não',
-    message: ''
-  });
+  const [formData, setFormData] = useState<ContactFormState>(INITIAL_FORM_STATE);
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  // Resetar o estado sempre que o modal for aberto
+  useEffect(() => {
+    if (isOpen) {
+      setSubmitted(false);
+      setLoading(false);
+      // Opcional: Se quiser limpar os campos toda vez que abre, descomente a linha abaixo:
+      // setFormData(INITIAL_FORM_STATE);
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -45,7 +57,6 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     }
 
     // 2. Enviar Email Silencioso (EmailJS)
-    // Executamos sem 'await' obstrutivo ou tratamos erro internamente para não travar o user
     sendEmailNotification(leadData).catch(err => console.error("Erro email:", err));
 
     try {
@@ -59,14 +70,16 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                           `*Investe:* ${formData.invests}\n` +
                           `*Mensagem:* ${formData.message}`;
                           
-      // Mudança para wa.me para melhor compatibilidade com Desktop
-      const whatsappUrl = `https://wa.me/5573991002247?text=${encodeURIComponent(messageText)}`;
+      // Usar api.whatsapp.com/send é mais garantido para Desktop App do que wa.me
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=5573991002247&text=${encodeURIComponent(messageText)}`;
 
       setSubmitted(true);
 
-      // 4. Redirecionamento ÚNICO para o WhatsApp após 1.5s
+      // 4. Redirecionamento para o WhatsApp após 1.5s
       setTimeout(() => {
         window.open(whatsappUrl, '_blank');
+        // Opcional: Fechar o modal automaticamente após redirecionar para evitar o "loop" visual se o usuário voltar
+        // onClose(); 
       }, 1500);
 
     } catch (error) {
@@ -167,6 +180,13 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
             <div className="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden max-w-[200px]">
                <div className="h-full bg-brand-yellow animate-[scroll_1.5s_linear_infinite] w-full origin-left transform scale-x-0"></div>
             </div>
+            {/* Botão para fechar manualmente caso o usuário volte */}
+            <button 
+              onClick={onClose}
+              className="mt-4 text-sm text-gray-500 hover:text-white underline"
+            >
+              Fechar janela
+            </button>
           </div>
         )}
       </div>
