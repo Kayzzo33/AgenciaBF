@@ -49,7 +49,6 @@ export const AIChat: React.FC = () => {
         }
 
         // 2. Send Silent Email (EmailJS)
-        // Isso confirma que os dados do chat vão para o email também
         sendEmailNotification(leadData).catch(err => console.error("Erro email chat:", err));
 
         // Generate confirmation text
@@ -64,9 +63,8 @@ export const AIChat: React.FC = () => {
                        `💰 *Faturamento/Investimento:* ${args.revenue}\n\n` +
                        `📝 *Resumo da Conversa:* \n${args.needs}`;
         
-        const encodedText = encodeURIComponent(waText);
-        // Usar api.whatsapp.com/send para melhor compatibilidade com Desktop
-        setWhatsappLink(`https://api.whatsapp.com/send?phone=5573991002247&text=${encodedText}`);
+        // Usar wa.me para melhor compatibilidade com Desktop
+        setWhatsappLink(`https://wa.me/5573991002247?text=${encodeURIComponent(waText)}`);
         setLeadSaved(true);
         
       } else {
@@ -115,7 +113,7 @@ export const AIChat: React.FC = () => {
                 {msg.text.includes('wa.me') || msg.text.includes('whatsapp.com') ? (
                     <span>
                         {msg.text.split(/https:\/\/(wa\.me|api\.whatsapp\.com)[^\s]*/)[0]}
-                        <a href="https://api.whatsapp.com/send?phone=5573991002247" target="_blank" rel="noopener noreferrer" className="underline font-bold text-brand-yellow hover:text-white">
+                        <a href="https://wa.me/5573991002247" target="_blank" rel="noopener noreferrer" className="underline font-bold text-brand-yellow hover:text-white">
                             Clique aqui para chamar no WhatsApp
                         </a>
                     </span>

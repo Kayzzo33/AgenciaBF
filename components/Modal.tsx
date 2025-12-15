@@ -75,9 +75,8 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                           `*Investe:* ${formData.invests}\n` +
                           `*Mensagem:* ${formData.message}`;
       
-      // Codificação robusta para URL
-      const encodedMessage = encodeURIComponent(messageText);
-      const whatsappUrl = `https://api.whatsapp.com/send?phone=5573991002247&text=${encodedMessage}`;
+      // Usar wa.me é mais robusto para redirecionar para o app Desktop instalado
+      const whatsappUrl = `https://wa.me/5573991002247?text=${encodeURIComponent(messageText)}`;
 
       setSubmitted(true);
 

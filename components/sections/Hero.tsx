@@ -26,7 +26,7 @@ export const Hero = ({ onOpenModal }: { onOpenModal: () => void }) => {
         <Reveal delay={400}>
           <div className="flex flex-col sm:flex-row gap-4">
             <a 
-              href={`https://api.whatsapp.com/send?phone=5573991002247&text=${encodeURIComponent("Olá! Gostaria de conhecer os serviços da BF Agência para gestão de tráfego pago.")}`}
+              href={`https://wa.me/5573991002247?text=${encodeURIComponent("Olá! Gostaria de conhecer os serviços da BF Agência para gestão de tráfego pago.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-brand-yellow text-black text-lg font-bold px-8 py-4 rounded-lg hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(255,193,7,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transform hover:-translate-y-1 flex items-center justify-center gap-2"
