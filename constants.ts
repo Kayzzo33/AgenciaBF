@@ -84,7 +84,7 @@ export const EXTENDED_TEAM = [
   },
   { 
     name: "Ytallo", 
-    role: "Gestor de Tráfego", 
+    role: "Estrategista digital", 
     instagram: "https://www.instagram.com/o.ytallo/", 
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764789524/Design_sem_nome_36_uvsfcy.png",
     thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_40_mweocc.png",

@@ -71,7 +71,7 @@ export const generateAIResponse = async (history: ChatMessage[]): Promise<{ text
     }));
 
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-flash-preview',
       contents: contents,
       config: {
         systemInstruction: systemInstruction,
