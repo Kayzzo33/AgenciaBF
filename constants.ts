@@ -106,4 +106,12 @@ export const EXTENDED_TEAM = [
     thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_38_vrxc6w.png",
     active: true
   },
+  { 
+    name: "Vanesca", 
+    role: "Comercial e Vendas", 
+    instagram: "https://www.instagram.com/vanesca_araujoo/", 
+    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1766511478/Design_sem_nome_44_ty0igi.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1766511821/Design_sem_nome_46_tliwsk.png",
+    active: true
+  },
 ];
