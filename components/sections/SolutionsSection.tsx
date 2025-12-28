@@ -27,10 +27,10 @@ export const SolutionsSection = () => {
                     <div className="absolute inset-0 bg-gradient-to-br from-brand-yellow/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                     <div className="mt-1 min-w-[28px]">
                       <div className="w-7 h-7 rounded-full bg-black border border-zinc-700 flex items-center justify-center text-brand-yellow group-hover:bg-brand-yellow group-hover:text-black transition-colors shadow-md">
-                        <CheckCircle2 size={16} />
+                        <CheckCircle2 size={16} aria-hidden="true" />
                       </div>
                     </div>
-                    <p className="text-zinc-200 font-medium text-lg leading-snug group-hover:text-white transition-colors relative z-10">{item}</p>
+                    <h3 className="text-zinc-200 font-medium text-lg leading-snug group-hover:text-white transition-colors relative z-10">{item}</h3>
                   </div>
                 </Reveal>
               ))}
@@ -54,13 +54,13 @@ export const SolutionsSection = () => {
                     >
                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-brand-yellow/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out pointer-events-none"></div>
                        <div className="min-w-[64px] w-[64px] h-[64px] rounded-xl bg-black border border-zinc-800 flex items-center justify-center text-brand-yellow group-hover:scale-110 group-hover:border-brand-yellow/50 transition-all duration-300 shadow-inner relative z-10">
-                          <item.icon size={28} />
+                          <item.icon size={28} aria-hidden="true" />
                        </div>
                        <h3 className="text-lg md:text-xl font-heading font-bold text-white group-hover:text-brand-yellow transition-colors leading-tight relative z-10">
                          {item.title}
                        </h3>
                        <div className="absolute right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0 text-brand-yellow">
-                          <ArrowRight size={20} />
+                          <ArrowRight size={20} aria-hidden="true" />
                        </div>
                     </div>
                   ))}
@@ -75,7 +75,8 @@ export const SolutionsSection = () => {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-brand-yellow/10 blur-[100px] rounded-full pointer-events-none"></div>
                     <img 
                       src={ASSETS.notebookBlack} 
-                      alt="Dashboard" 
+                      alt="Dashboard de resultados exibido em um notebook" 
+                      loading="lazy"
                       className="w-full max-w-sm h-auto object-contain drop-shadow-2xl transform hover:scale-105 transition-transform duration-700" 
                     />
                  </div>
@@ -85,9 +86,8 @@ export const SolutionsSection = () => {
 
       </div>
 
-      {/* Blurred Notebook - Left Side - Small & Opaque */}
       <div className="hidden lg:block absolute bottom-[-80px] left-[-40px] z-30 w-[150px] pointer-events-none">
-        <img src={ASSETS.notebookBlur} alt="" className="w-full h-auto object-contain opacity-100" />
+        <img src={ASSETS.notebookBlur} alt="" role="presentation" className="w-full h-auto object-contain opacity-100" />
       </div>
     </section>
   );
