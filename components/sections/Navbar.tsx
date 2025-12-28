@@ -18,7 +18,6 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
       <nav 
         className={cn(
           "pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex items-center justify-between",
-          // Layout da Navbar: Encolhe e adiciona fundo ao rolar
           isScrolled 
             ? "mt-6 w-[92%] md:w-fit bg-black/70 backdrop-blur-xl border border-white/10 rounded-full px-8 py-4 shadow-[0_0_30px_rgba(0,0,0,0.5)] md:gap-12" 
             : "w-full max-w-7xl px-6 py-10 mt-2 bg-transparent md:gap-0"
@@ -27,10 +26,9 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
         <div className="flex items-center gap-3">
           <img 
             src={ASSETS.logoMain} 
-            alt="BF Logo" 
+            alt="BF Logo - Início" 
             className="h-10 w-auto object-contain transition-transform hover:scale-110" 
           />
-          {/* LogoText: Visível apenas em Desktop/Tablet (md:block) e quando NÃO está rolado */}
           <div 
              className={cn(
                "hidden md:flex overflow-hidden transition-all duration-500 ease-in-out",
@@ -39,7 +37,7 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
           >
             <img 
               src={ASSETS.logoText} 
-              alt="Agência" 
+              alt="BF Agência de Gestão de Tráfego" 
               className="h-8 w-auto object-contain" 
             />
           </div>
@@ -62,8 +60,10 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
             Falar com Especialista
           </button>
           <button 
-            className={cn("md:hidden transition-colors", isScrolled ? "text-white" : "text-black")} 
+            className={cn("md:hidden transition-colors p-2", isScrolled ? "text-white" : "text-black")} 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

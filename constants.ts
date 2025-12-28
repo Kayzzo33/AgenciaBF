@@ -1,24 +1,26 @@
 import { Target, TrendingUp, MessageCircle, Cpu, Eye, Users } from 'lucide-react';
 
-// Assets configuration
+// Assets configuration with Cloudinary optimization parameters
+const CLOUDINARY_BASE = "https://res.cloudinary.com/djpdiwdxt/image/upload/f_auto,q_auto";
+
 export const ASSETS = {
-  heroBg: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784953/BackGround_Hero_syepak.jpg", 
-  logoMain: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784701/logo_bf_hero_bcswa7.png",
-  logoText: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784736/agencia_logo_hero_iv4l2t.png",
-  heroLogo: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784775/Logo_Preta_gkfaix.png",
-  logoWatermark: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784887/logo_amarela_lwvtk6.png",
-  introBg: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764786446/fundo_section2_avqlo5.jpg",
-  notebook: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784887/notebook_xro8m7.png",
-  arrow: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784886/SETAS_aggeri.png",
-  logoYellow: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784887/logo_amarela_lwvtk6.png",
-  teamBg: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764786392/Fundobsluan_pikhlq.jpg",
-  teamPerson1: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785101/BFCOMSOMBRA_ojuysb.png",
-  teamPerson2: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785101/LuanComSombra_g0tsot.png",
-  teamFrame: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785099/QuadradoLinha_quqo4f.png", 
-  teamLogo: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764784775/Logo_Preta_gkfaix.png",
-  notebookBlack: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764787033/notebookblack_-_Editado_b91fnn.png",
-  notebookBlur: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785100/notebookblack_-_Editado_b91fnn.png",
-  partnerPerson: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785607/Gemini_Generated_Image_r9yafcr9yafcr9ya_zap6qs.png",
+  heroBg: `${CLOUDINARY_BASE}/v1764784953/BackGround_Hero_syepak.jpg`, 
+  logoMain: `${CLOUDINARY_BASE}/v1764784701/logo_bf_hero_bcswa7.png`,
+  logoText: `${CLOUDINARY_BASE}/v1764784736/agencia_logo_hero_iv4l2t.png`,
+  heroLogo: `${CLOUDINARY_BASE}/v1764784775/Logo_Preta_gkfaix.png`,
+  logoWatermark: `${CLOUDINARY_BASE}/v1764784887/logo_amarela_lwvtk6.png`,
+  introBg: `${CLOUDINARY_BASE}/v1764786446/fundo_section2_avqlo5.jpg`,
+  notebook: `${CLOUDINARY_BASE}/v1764784887/notebook_xro8m7.png`,
+  arrow: `${CLOUDINARY_BASE}/v1764784886/SETAS_aggeri.png`,
+  logoYellow: `${CLOUDINARY_BASE}/v1764784887/logo_amarela_lwvtk6.png`,
+  teamBg: `${CLOUDINARY_BASE}/v1764786392/Fundobsluan_pikhlq.jpg`,
+  teamPerson1: `${CLOUDINARY_BASE}/v1764785101/BFCOMSOMBRA_ojuysb.png`,
+  teamPerson2: `${CLOUDINARY_BASE}/v1764785101/LuanComSombra_g0tsot.png`,
+  teamFrame: `${CLOUDINARY_BASE}/v1764785099/QuadradoLinha_quqo4f.png`, 
+  teamLogo: `${CLOUDINARY_BASE}/v1764784775/Logo_Preta_gkfaix.png`,
+  notebookBlack: `${CLOUDINARY_BASE}/v1764787033/notebookblack_-_Editado_b91fnn.png`,
+  notebookBlur: `${CLOUDINARY_BASE}/v1764785100/notebookblack_-_Editado_b91fnn.png`,
+  partnerPerson: `${CLOUDINARY_BASE}/v1764785607/Gemini_Generated_Image_r9yafcr9yafcr9ya_zap6qs.png`,
 };
 
 // Data
@@ -70,48 +72,48 @@ export const EXTENDED_TEAM = [
     name: "Anne", 
     role: "Setor Administrativo", 
     instagram: "https://www.instagram.com/anneujjo/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785473/Design_sem_nome_33_kbp3ml.png", 
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_42_q2cfik.png",
+    image: `${CLOUDINARY_BASE}/v1764785473/Design_sem_nome_33_kbp3ml.png`, 
+    thumbnail: `${CLOUDINARY_BASE}/w_200,c_fill,g_face,f_auto,q_auto/v1765329731/Design_sem_nome_42_q2cfik.png`,
     active: true
   },
   { 
     name: "Gleice", 
     role: "Suporte ao cliente", 
     instagram: "https://www.instagram.com/gleh_01/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764785473/Design_sem_nome_34_juikmo.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_41_fyoiso.png",
+    image: `${CLOUDINARY_BASE}/v1764785473/Design_sem_nome_34_juikmo.png`,
+    thumbnail: `${CLOUDINARY_BASE}/w_200,c_fill,g_face,f_auto,q_auto/v1765329731/Design_sem_nome_41_fyoiso.png`,
     active: true 
   },
   { 
     name: "Ytallo", 
     role: "Estrategista digital", 
     instagram: "https://www.instagram.com/o.ytallo/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764789524/Design_sem_nome_36_uvsfcy.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_40_mweocc.png",
+    image: `${CLOUDINARY_BASE}/v1764789524/Design_sem_nome_36_uvsfcy.png`,
+    thumbnail: `${CLOUDINARY_BASE}/w_200,c_fill,g_face,f_auto,q_auto/v1765329731/Design_sem_nome_40_mweocc.png`,
     active: true
   },
   { 
     name: "Evinho", 
     role: "Especialista em Google meu Negócio", 
     instagram: "https://www.instagram.com/evin_san_?igsh=NGN4MmN0MTF4b3ow", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1764789524/Design_sem_nome_35_wknqat.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_39_xe3zaw.png",
+    image: `${CLOUDINARY_BASE}/v1764789524/Design_sem_nome_35_wknqat.png`,
+    thumbnail: `${CLOUDINARY_BASE}/w_200,c_fill,g_face,f_auto,q_auto/v1765329731/Design_sem_nome_39_xe3zaw.png`,
     active: true
   },
   { 
     name: "Giselle", 
     role: "Especialista em Contingência", 
     instagram: "https://www.instagram.com/g.soglia/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765326689/Design_sem_nome_37_a2mqkn.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1765329731/Design_sem_nome_38_vrxc6w.png",
+    image: `${CLOUDINARY_BASE}/v1765326689/Design_sem_nome_37_a2mqkn.png`,
+    thumbnail: `${CLOUDINARY_BASE}/w_200,c_fill,g_face,f_auto,q_auto/v1765329731/Design_sem_nome_38_vrxc6w.png`,
     active: true
   },
   { 
     name: "Vanesca", 
     role: "Comercial e Vendas", 
     instagram: "https://www.instagram.com/vanesca_araujoo/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1766511478/Design_sem_nome_44_ty0igi.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1766511821/Design_sem_nome_46_tliwsk.png",
+    image: `${CLOUDINARY_BASE}/v1766511478/Design_sem_nome_44_ty0igi.png`,
+    thumbnail: `${CLOUDINARY_BASE}/w_200,c_fill,g_face,f_auto,q_auto/v1766511821/Design_sem_nome_46_tliwsk.png`,
     active: true
   },
 ];

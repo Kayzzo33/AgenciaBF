@@ -34,28 +34,20 @@ export const AIChat: React.FC = () => {
       const { text, functionCall } = await generateAIResponse(newHistory);
 
       if (functionCall && functionCall.name === 'saveLead') {
-        // AI decided to save the lead
         const args = functionCall.args;
-        const leadData = {
-            ...args,
-            source: 'chatbot_qualification'
-        };
+        const leadData = { ...args, source: 'chatbot_qualification' };
         
-        // 1. Save to Firebase
         try {
             await saveLead(leadData);
         } catch (e) {
              console.warn("Aviso: Falha ao salvar lead no Firebase, continuando fluxo.", e);
         }
 
-        // 2. Send Silent Email (EmailJS)
         sendEmailNotification(leadData).catch(err => console.error("Erro email chat:", err));
 
-        // Generate confirmation text
         const confirmText = "Perfeito! Já registrei seus dados e passei o resumo da nossa conversa para a equipe. Clique no botão abaixo para concluir o atendimento no WhatsApp.";
         setMessages(prev => [...prev, { role: 'model', text: confirmText }]);
         
-        // Setup WhatsApp Button with RICH CONTEXT
         const waText = `*Iniciando Atendimento (Via Chatbot Site)*\n\n` +
                        `👤 *Nome:* ${args.name}\n` +
                        `🏢 *Empresa/Projeto:* ${args.company}\n` +
@@ -63,15 +55,11 @@ export const AIChat: React.FC = () => {
                        `💰 *Faturamento/Investimento:* ${args.revenue}\n\n` +
                        `📝 *Resumo da Conversa:* \n${args.needs}`;
         
-        // Usar wa.me para melhor compatibilidade com Desktop
         setWhatsappLink(`https://wa.me/5573991002247?text=${encodeURIComponent(waText)}`);
         setLeadSaved(true);
-        
       } else {
-        // Normal text response
         setMessages(prev => [...prev, { role: 'model', text: text || "Entendido." }]);
       }
-
     } catch (e) {
       console.error(e);
       setMessages(prev => [...prev, { role: 'model', text: 'Desculpe, tive um erro de conexão. Por favor, use o botão do WhatsApp no canto da tela.' }]);
@@ -82,34 +70,29 @@ export const AIChat: React.FC = () => {
 
   return (
     <>
-      {/* Trigger Button */}
       <button 
         onClick={() => setIsOpen(true)} 
         className={`fixed bottom-24 right-5 z-[90] bg-zinc-800 hover:bg-zinc-700 text-white p-3 rounded-full shadow-lg border border-brand-yellow/30 transition-all duration-300 ${isOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 scale-100'}`}
-        title="Falar com IA"
+        aria-label="Abrir chat com Inteligência Artificial"
       >
-        <Bot size={24} className="text-brand-yellow" />
+        <Bot size={24} className="text-brand-yellow" aria-hidden="true" />
       </button>
 
-      {/* Chat Window */}
-      <div className={`fixed bottom-5 right-5 sm:bottom-24 sm:right-5 z-[99] w-[90vw] sm:w-[350px] bg-[#0a0a0a] border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 origin-bottom-right ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10 pointer-events-none'}`}>
-        {/* Header */}
+      <div className={`fixed bottom-5 right-5 sm:bottom-24 sm:right-5 z-[99] w-[90vw] sm:w-[350px] bg-[#0a0a0a] border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 origin-bottom-right ${isOpen ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-10 pointer-events-none'}`} role="dialog" aria-label="Janela do Chat Inteligente">
         <div className="bg-zinc-900 p-4 flex justify-between items-center border-b border-zinc-800">
           <div className="flex items-center gap-2">
-            <Bot className="text-brand-yellow" size={20} />
+            <Bot className="text-brand-yellow" size={20} aria-hidden="true" />
             <span className="font-heading font-bold text-white text-sm">BF Intelligence</span>
           </div>
-          <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white">
+          <button onClick={() => setIsOpen(false)} className="text-gray-400 hover:text-white p-1" aria-label="Fechar chat">
             <X size={18} />
           </button>
         </div>
 
-        {/* Messages */}
         <div className="h-[300px] overflow-y-auto p-4 space-y-3 bg-black/90">
           {messages.map((msg, idx) => (
             <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
               <div className={`max-w-[85%] p-3 rounded-lg text-sm ${msg.role === 'user' ? 'bg-brand-yellow text-black rounded-tr-none' : 'bg-zinc-800 text-gray-200 rounded-tl-none'}`}>
-                {/* Check if text contains a link (simple heuristic) */}
                 {msg.text.includes('wa.me') || msg.text.includes('whatsapp.com') ? (
                     <span>
                         {msg.text.split(/https:\/\/(wa\.me|api\.whatsapp\.com)[^\s]*/)[0]}
@@ -134,7 +117,6 @@ export const AIChat: React.FC = () => {
             </div>
           )}
 
-          {/* CTA for Saved Lead */}
           {leadSaved && (
              <div className="flex justify-center mt-4 pb-2">
                 <a 
@@ -152,7 +134,6 @@ export const AIChat: React.FC = () => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
         <div className="p-3 bg-zinc-900 border-t border-zinc-800 flex gap-2">
           <input 
             type="text" 
@@ -162,11 +143,13 @@ export const AIChat: React.FC = () => {
             disabled={leadSaved} 
             placeholder={leadSaved ? "Atendimento transferido para WhatsApp" : "Digite sua mensagem..."}
             className="flex-1 bg-black border border-zinc-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-yellow disabled:opacity-50"
+            aria-label="Sua mensagem"
           />
           <button 
             onClick={handleSend} 
             disabled={leadSaved}
             className="bg-brand-yellow text-black p-2 rounded-lg hover:bg-yellow-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            aria-label="Enviar mensagem"
           >
             <Send size={18} />
           </button>
