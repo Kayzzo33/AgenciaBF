@@ -19,14 +19,14 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
         className={cn(
           "pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex items-center justify-between",
           isScrolled 
-            ? "mt-6 w-[92%] md:w-fit bg-black/70 backdrop-blur-xl border border-white/10 rounded-full px-8 py-4 shadow-[0_0_30px_rgba(0,0,0,0.5)] md:gap-12" 
+            ? "mt-6 w-[92%] md:w-fit bg-black/80 backdrop-blur-xl border border-white/20 rounded-full px-8 py-4 shadow-[0_0_30px_rgba(0,0,0,0.6)] md:gap-12" 
             : "w-full max-w-7xl px-6 py-10 mt-2 bg-transparent md:gap-0"
         )}
       >
         <div className="flex items-center gap-3">
           <img 
             src={ASSETS.logoMain} 
-            alt="BF Logo - Início" 
+            alt="BF Agência de Gestão de Tráfego - Logotipo" 
             className="h-10 w-auto object-contain transition-transform hover:scale-110" 
           />
           <div 
@@ -37,16 +37,16 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
           >
             <img 
               src={ASSETS.logoText} 
-              alt="BF Agência de Gestão de Tráfego" 
+              alt="BF Agência" 
               className="h-8 w-auto object-contain" 
             />
           </div>
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <a href="#home" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-300 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Início</a>
-          <a href="#about" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-300 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Quem Somos</a>
-          <a href="#services" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-300 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Serviços</a>
+          <a href="#home" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-100 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Início</a>
+          <a href="#about" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-100 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Quem Somos</a>
+          <a href="#services" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-100 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Serviços</a>
         </div>
 
         <div className="flex items-center gap-4">
@@ -62,7 +62,7 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
           <button 
             className={cn("md:hidden transition-colors p-2", isScrolled ? "text-white" : "text-black")} 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-label={isMenuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"}
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -70,10 +70,10 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
         </div>
 
         {isMenuOpen && (
-          <div className="absolute top-full mt-4 left-0 right-0 bg-zinc-900/95 backdrop-blur-lg border border-white/10 rounded-2xl p-4 flex flex-col gap-4 md:hidden animate-[fadeIn_0.2s] shadow-2xl mx-4 pointer-events-auto">
-            <a href="#home" className="text-white p-2 text-center font-medium hover:text-brand-yellow" onClick={() => setIsMenuOpen(false)}>Início</a>
-            <a href="#about" className="text-white p-2 text-center font-medium hover:text-brand-yellow" onClick={() => setIsMenuOpen(false)}>Quem Somos</a>
-            <a href="#services" className="text-white p-2 text-center font-medium hover:text-brand-yellow" onClick={() => setIsMenuOpen(false)}>Serviços</a>
+          <div className="absolute top-full mt-4 left-0 right-0 bg-zinc-900/98 backdrop-blur-lg border border-white/20 rounded-2xl p-4 flex flex-col gap-4 md:hidden animate-[fadeIn_0.2s] shadow-2xl mx-4 pointer-events-auto">
+            <a href="#home" className="text-white p-2 text-center font-bold uppercase tracking-widest text-sm hover:text-brand-yellow" onClick={() => setIsMenuOpen(false)}>Início</a>
+            <a href="#about" className="text-white p-2 text-center font-bold uppercase tracking-widest text-sm hover:text-brand-yellow" onClick={() => setIsMenuOpen(false)}>Quem Somos</a>
+            <a href="#services" className="text-white p-2 text-center font-bold uppercase tracking-widest text-sm hover:text-brand-yellow" onClick={() => setIsMenuOpen(false)}>Serviços</a>
           </div>
         )}
       </nav>
