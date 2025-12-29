@@ -40,13 +40,13 @@ export const TeamSection = () => {
              <div className={cn("absolute top-[20%] -left-[10%] z-30 text-left hidden lg:block transition-all duration-700 delay-500", isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10")}>
                 <h3 className="text-brand-yellow font-heading font-bold text-3xl mb-1">Geriel Soglia</h3>
                 <div className="w-24 h-[2px] bg-white mb-1 shadow-[0_0_10px_rgba(255,255,255,0.8)]"></div>
-                <p className="text-white text-xl font-light">CEO e Gestor de Tráfego</p>
+                <p className="text-white text-xl font-light">CEO & Founder</p>
              </div>
              
              <div className="lg:hidden w-full text-center mb-6">
                 <h3 className="text-brand-yellow font-heading font-bold text-2xl md:text-3xl">Geriel Soglia</h3>
                 <div className="w-12 h-[2px] bg-white mx-auto my-2"></div>
-                <p className="text-white text-lg">CEO e Gestor de Tráfego</p>
+                <p className="text-white text-lg">CEO & Founder</p>
              </div>
              
              {ASSETS.teamFrame && (
