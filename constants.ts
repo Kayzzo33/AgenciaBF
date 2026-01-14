@@ -110,7 +110,7 @@ export const EXTENDED_TEAM = [
   },
   { 
     name: "Vanesca", 
-    role: "Comercial e Vendas", 
+    role: "Copywriting", 
     instagram: "https://www.instagram.com/vanesca_araujoo/", 
     image: `${CLOUDINARY_BASE}/v1766511478/Design_sem_nome_44_ty0igi.png`,
     thumbnail: `${CLOUDINARY_BASE}/w_200,c_fill,g_face,f_auto,q_auto/v1766511821/Design_sem_nome_46_tliwsk.png`,
