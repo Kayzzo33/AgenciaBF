@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from './components/Modal';
 import { AIChat } from './components/AIChat';
 import { Navbar } from './components/sections/Navbar';
@@ -16,9 +16,23 @@ import { Stats } from './components/sections/Stats';
 import { CtaSection } from './components/sections/CtaSection';
 import { Footer } from './components/sections/Footer';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
+import { cn } from './utils';
 
 const App: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showFloatingButtons, setShowFloatingButtons] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Exibe os botões flutuantes após passar 600px de scroll
+      setShowFloatingButtons(window.scrollY > 600);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className="bg-black min-h-screen font-sans text-white selection:bg-brand-yellow selection:text-black">
@@ -37,8 +51,15 @@ const App: React.FC = () => {
       <CtaSection onOpenModal={() => setIsModalOpen(true)} />
       <Footer />
       
-      <FloatingWhatsApp />
-      <AIChat />
+      {/* Wrapper para controlar visibilidade no mobile vs desktop */}
+      <div className={cn(
+        "transition-opacity duration-500",
+        showFloatingButtons ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto"
+      )}>
+        <FloatingWhatsApp />
+        <AIChat />
+      </div>
+      
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );

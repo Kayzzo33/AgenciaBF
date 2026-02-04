@@ -17,21 +17,21 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
     <div className="fixed top-0 left-0 right-0 z-50 flex justify-center transition-all duration-300 pointer-events-none">
       <nav 
         className={cn(
-          "pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] flex items-center justify-between",
+          "pointer-events-auto transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1)] flex items-center justify-between",
           isScrolled 
-            ? "mt-6 w-[92%] md:w-fit bg-black/80 backdrop-blur-xl border border-white/20 rounded-full px-8 py-4 shadow-[0_0_30px_rgba(0,0,0,0.6)] md:gap-12" 
-            : "w-full max-w-7xl px-6 py-10 mt-2 bg-transparent md:gap-0"
+            ? "mt-6 w-[95%] md:w-[85%] lg:w-[75%] max-w-5xl bg-black/80 backdrop-blur-xl border border-white/20 rounded-full px-6 md:px-8 py-3 md:py-4 shadow-[0_0_30px_rgba(0,0,0,0.6)] gap-4 md:gap-12" 
+            : "w-full max-w-7xl px-6 py-8 md:py-10 mt-0 bg-transparent gap-0"
         )}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <img 
             src={ASSETS.logoMain} 
             alt="BF Agência de Gestão de Tráfego - Logotipo" 
-            className="h-10 w-auto object-contain transition-transform hover:scale-110" 
+            className="h-8 md:h-10 w-auto object-contain transition-transform hover:scale-110" 
           />
           <div 
              className={cn(
-               "hidden md:flex overflow-hidden transition-all duration-500 ease-in-out",
+               "hidden md:flex overflow-hidden transition-all duration-700 ease-in-out",
                isScrolled ? "max-w-0 opacity-0" : "max-w-[200px] opacity-100"
              )}
           >
@@ -43,18 +43,18 @@ export const Navbar = ({ onOpenModal }: { onOpenModal: () => void }) => {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8 whitespace-nowrap">
           <a href="#home" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-100 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Início</a>
           <a href="#about" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-100 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Quem Somos</a>
           <a href="#services" className={cn("transition-colors text-sm uppercase tracking-wider font-bold", isScrolled ? "text-gray-100 hover:text-brand-yellow" : "text-black hover:text-zinc-700")}>Serviços</a>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 shrink-0">
           <button 
             onClick={onOpenModal}
             className={cn(
               "bg-brand-yellow hover:bg-yellow-400 text-black font-bold rounded-full transition-all hover:shadow-[0_0_15px_rgba(255,193,7,0.4)] hover:-translate-y-0.5 whitespace-nowrap",
-              isScrolled ? "px-5 py-2 text-sm" : "px-6 py-3 shadow-xl"
+              isScrolled ? "px-5 py-2 text-xs md:text-sm" : "px-6 py-3 shadow-xl text-sm"
             )}
           >
             Falar com Especialista
