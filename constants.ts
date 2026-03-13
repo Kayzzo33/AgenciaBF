@@ -18,7 +18,7 @@ export const ASSETS = {
   teamPerson2: `${CLOUDINARY_BASE}/v1764785101/LuanComSombra_g0tsot.png`,
   teamFrame: `${CLOUDINARY_BASE}/v1764785099/QuadradoLinha_quqo4f.png`, 
   teamLogo: `${CLOUDINARY_BASE}/v1764784775/Logo_Preta_gkfaix.png`,
-  teamGroup: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770229804/EquipeBF_zs957e.png",
+  teamGroup: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1773419178/EquipeBF_1_xqqrzd.png",
   notebookBlack: `${CLOUDINARY_BASE}/v1764787033/notebookblack_-_Editado_b91fnn.png`,
   notebookBlur: `${CLOUDINARY_BASE}/v1764785100/notebookblack_-_Editado_b91fnn.png`,
   partnerPerson: `${CLOUDINARY_BASE}/v1764785607/Gemini_Generated_Image_r9yafcr9yafcr9ya_zap6qs.png`,
@@ -70,6 +70,22 @@ export const ADAPTATION_ITEMS = [
 
 export const EXTENDED_TEAM = [
   {
+    name: "Mônica",
+    role: "Social Media",
+    instagram: "https://www.instagram.com/_bfagencia/",
+    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1773419556/Design_sem_nome_79_y0odb6.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1773419550/Rostobf_xrshbz.png",
+    active: true
+  },
+  { 
+    name: "Gleice", 
+    role: "Suporte ao cliente", 
+    instagram: "https://www.instagram.com/gleh_01/", 
+    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230307/3_w0xudp.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230317/4_cu8hz0.png",
+    active: true 
+  },
+  {
     name: "Geriel Soglia",
     role: "CEO & Founder",
     instagram: "https://www.instagram.com/ogeriiel/",
@@ -83,38 +99,6 @@ export const EXTENDED_TEAM = [
     instagram: "https://www.instagram.com/marcosg_jr/",
     image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230307/8_j6pnvt.png",
     thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230317/1_ux9pyq.png",
-    active: true
-  },
-  { 
-    name: "Anne", 
-    role: "Setor Administrativo", 
-    instagram: "https://www.instagram.com/anneujjo/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230308/1_a8i8lp.png", 
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230317/2_mdorsm.png",
-    active: true
-  },
-  { 
-    name: "Gleice", 
-    role: "Suporte ao cliente", 
-    instagram: "https://www.instagram.com/gleh_01/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230307/3_w0xudp.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230317/4_cu8hz0.png",
-    active: true 
-  },
-  { 
-    name: "Ytallo", 
-    role: "Estrategista digital", 
-    instagram: "https://www.instagram.com/o.ytallo/", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230308/2_ghf0o7.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230317/3_irbm0z.png",
-    active: true
-  },
-  { 
-    name: "Evinho", 
-    role: "Especialista em Google meu Negócio", 
-    instagram: "https://www.instagram.com/evin_san_?igsh=NGN4MmN0MTF4b3ow", 
-    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230307/5_owjids.png",
-    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230320/7_ldt3cq.png",
     active: true
   },
   { 
@@ -133,4 +117,20 @@ export const EXTENDED_TEAM = [
     thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230316/8_jgxhu3.png",
     active: true
   },
+  { 
+    name: "Ytallo", 
+    role: "Estrategista digital", 
+    instagram: "https://www.instagram.com/o.ytallo/", 
+    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230308/2_ghf0o7.png",
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230317/3_irbm0z.png",
+    active: true
+  },
+  { 
+    name: "Anne", 
+    role: "Setor Administrativo", 
+    instagram: "https://www.instagram.com/anneujjo/", 
+    image: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230308/1_a8i8lp.png", 
+    thumbnail: "https://res.cloudinary.com/djpdiwdxt/image/upload/v1770230317/2_mdorsm.png",
+    active: true
+  }
 ];

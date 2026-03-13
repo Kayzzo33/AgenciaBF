@@ -16,46 +16,56 @@ export const ExtendedTeamSection = () => {
              </h2>
           </Reveal>
           
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 max-w-6xl mx-auto">
-             {EXTENDED_TEAM.map((member, idx) => (
-               <div 
-                 key={idx}
-                 onClick={() => member.active && setActiveMember(member)}
-                 className={cn(
-                   "relative group rounded-2xl p-4 transition-all duration-300 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-4 w-[45%] md:w-56 flex-grow-0",
-                   member.active ? "cursor-pointer hover:border-brand-yellow hover:bg-zinc-800 hover:-translate-y-2" : "opacity-50 grayscale cursor-not-allowed"
-                 )}
-                 role="button"
-                 aria-label={`Ver mais sobre ${member.name}`}
-               >
-                  <div className={cn(
-                    "w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 transition-all duration-300",
-                    member.active ? "border-brand-yellow/50 group-hover:border-brand-yellow" : "border-zinc-700"
-                  )}>
-                    {member.thumbnail || member.image ? (
-                      <img 
-                        src={member.thumbnail || member.image} 
-                        alt={`Foto de ${member.name}`} 
-                        loading="lazy"
-                        className="w-full h-full object-cover object-top" 
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600">
-                        <User size={32} />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-x-8 md:gap-y-12 max-w-5xl mx-auto md:py-12">
+             {EXTENDED_TEAM.map((member, idx) => {
+               const isTopOuter = idx === 0 || idx === 3;
+               const isBottomOuter = idx === 4 || idx === 7;
+
+               let wrapperClass = "";
+               if (isTopOuter) wrapperClass = "md:-translate-y-4";
+               if (isBottomOuter) wrapperClass = "md:translate-y-4";
+
+               return (
+                 <div key={idx} className={wrapperClass}>
+                   <div 
+                     onClick={() => member.active && setActiveMember(member)}
+                     className={cn(
+                       "relative group rounded-2xl p-4 transition-all duration-300 border border-zinc-800 bg-zinc-900/50 flex flex-col items-center justify-center gap-4 h-full",
+                       member.active ? "cursor-pointer hover:border-brand-yellow hover:bg-zinc-800 hover:-translate-y-2" : "opacity-50 grayscale cursor-not-allowed"
+                     )}
+                     role="button"
+                     aria-label={`Ver mais sobre ${member.name}`}
+                   >
+                      <div className={cn(
+                        "w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden border-2 transition-all duration-300",
+                        member.active ? "border-brand-yellow/50 group-hover:border-brand-yellow" : "border-zinc-700"
+                      )}>
+                        {member.thumbnail || member.image ? (
+                          <img 
+                            src={member.thumbnail || member.image} 
+                            alt={`Foto de ${member.name}`} 
+                            loading="lazy"
+                            className="w-full h-full object-cover object-top" 
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-zinc-800 flex items-center justify-center text-zinc-600">
+                            <User size={32} />
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  
-                  <div className="text-center">
-                    <h3 className="text-white font-bold text-sm md:text-lg">{member.name}</h3>
-                    <p className="text-brand-yellow text-xs uppercase tracking-wider font-medium">{member.role}</p>
-                  </div>
-                  
-                  {member.active && (
-                    <div className="absolute inset-0 bg-brand-yellow/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none"></div>
-                  )}
-               </div>
-             ))}
+                      
+                      <div className="text-center">
+                        <h3 className="text-white font-bold text-sm md:text-lg">{member.name}</h3>
+                        <p className="text-brand-yellow text-xs uppercase tracking-wider font-medium">{member.role}</p>
+                      </div>
+                      
+                      {member.active && (
+                        <div className="absolute inset-0 bg-brand-yellow/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none"></div>
+                      )}
+                   </div>
+                 </div>
+               );
+             })}
           </div>
        </div>
 
